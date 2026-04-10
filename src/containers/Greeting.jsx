@@ -11,53 +11,64 @@ export default function Greeting(props) {
 
   return (
     <Fade direction="up" duration={2000} triggerOnce>
-      <div className="mx-auto mt-8 block max-w-[75%] px-3 lg:max-w-[900px] md:max-w-full" id="greeting">
+      {/* Container: 
+        - Max width restricted for a clean look 
+        - flex-col for mobile (stacked)
+        - md:flex-row for desktop (side-by-side)
+      */}
+      <div 
+        className="mx-auto flex min-h-[80vh] max-w-[90%] flex-col items-center justify-between px-4 py-10 md:flex-row lg:max-w-300" 
+        id="greeting"
+      >
         
-        <div className="flex flex-col md:block lg:flex-row">
-          
-          <div className="flex-1 mb-[30px]">
-            <div>
-              <h1 className="mt-0 text-[30px] font-bold leading-tight text-center md:mt-[110px] md:text-[50px] lg:text-[70px] lg:text-left lg:leading-none font-sans">
-                {greeting.title}
-              </h1>
-              
-              <p
-                className="mt-4 text-[16px] leading-normal text-center md:text-[20px] lg:mr-10 lg:text-[30px] lg:leading-10 lg:text-left font-medium"
-                style={{ color: theme.secondaryText }}
-              >
-                <span>I'm </span>
-                <span style={{ color: theme.accentColor }}>
-                  {greeting.full_name}.{" "}
-                </span>
-                {greeting.subTitle}
-              </p>
+        {/* Left Side: Text Content */}
+        <div className="mb-10 w-full md:mb-0 md:w-1/2">
+          <div className="text-center md:text-left">
+            <h1 
+              className="font-sans text-[40px] font-bold leading-tight md:text-[50px] lg:text-[70px]"
+              style={{ color: theme.text }}
+            >
+              {greeting.title}
+            </h1>
+            
+            <p
+              className="mt-4 font-sans text-[18px] font-medium leading-relaxed md:text-[20px] lg:text-[28px]"
+              style={{ color: theme.secondaryText }}
+            >
+              <span>I'm </span>
+              <span style={{ color: theme.accentColor }}>
+                {greeting.full_name}.{" "}
+              </span>
+              {greeting.subTitle}
+            </p>
 
-              {/* FIXED: Added theme prop here */}
+            <div className="mt-6 flex justify-center md:justify-start">
               <SocialMedia theme={theme} />
+            </div>
 
-              <div className="flex w-full justify-center lg:justify-start">
-                <button
-                  className="button mt-6 h-[50px] w-[200px] cursor-pointer rounded border-0 text-[17px] font-bold text-white transition-all duration-200 ease-in-out hover:scale-105"
-                  style={{ 
-                    backgroundColor: theme.accentBright,
-                    boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1)` 
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.boxShadow = `0 5px 15px ${theme.accentBright}`}
-                  onMouseOut={(e) => e.currentTarget.style.boxShadow = "none"}
-                  onClick={() => {
-                    navigate("/contact"); // FIXED: useNavigate syntax
-                  }}
-                >
-                  Contact Me
-                </button>
-              </div>
+            <div className="mt-8 flex justify-center md:justify-start">
+              <button
+                className="h-12.5 w-50 cursor-pointer rounded border-0 text-[17px] font-bold text-white transition-all duration-200 ease-in-out hover:scale-105"
+                style={{ 
+                  backgroundColor: theme.accentBright,
+                }}
+                onMouseOver={(e) => e.currentTarget.style.boxShadow = `0 5px 15px ${theme.accentBright}`}
+                onMouseOut={(e) => e.currentTarget.style.boxShadow = "none"}
+                onClick={() => navigate("/contact")}
+              >
+                Contact Me
+              </button>
             </div>
           </div>
+        </div>
 
-          <div className="flex-1 mb-[30px] *:max-w-full *:h-auto">
+        {/* Right Side: Animation/SVG */}
+        <div className="flex w-full justify-center md:w-1/2">
+          <div className="w-full max-w-125 lg:max-w-162.5">
             <FeelingProud theme={theme} />
           </div>
         </div>
+
       </div>
     </Fade>
   );
