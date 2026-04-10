@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Fade } from "react-awesome-reveal";
 import { NavLink, Link } from "react-router-dom";
 import { greeting, settings } from "../portfolio.js";
 import { CgSun } from "react-icons/cg";
@@ -18,83 +17,91 @@ function Header(props) {
 
   const link = settings.isSplash ? "/splash" : "/home";
 
-  // Common NavLink styles
-  const navLinkBase = "block px-5 py-2.5 no-underline transition-all duration-200 ease-in-out rounded-md my-0.5 mx-1 lg:my-0 lg:mx-1.25";
-  
-  const icon = theme.name === "dark" ? (
-    <HiMoon size={20} color={theme.name === "light" ? "#F9D784" : "#A7A7A7"} />
-  ) : (
-    <CgSun size={20} color={theme.name === "light" ? "#F9D784" : "#A7A7A7"} />
-  );
+  // Shared Tailwind classes for NavLinks
+  const navLinkClasses = ({ isActive }) =>
+    `px-4 py-2 rounded transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-800 ${
+      isActive ? "font-bold" : ""
+    }`;
 
   return (
-    <Fade top duration={1000} distance="20px">
-      <header className="sticky top-0 z-50 bg-transparent px-2.5 py-5 mx-auto -mt-2.5 block max-w-19/20 md:flex md:items-center md:justify-between">
-        {/* Logo */}
-        <NavLink to={link} className="block float-left text-6 leading-normal no-underline mt-3 md:mt-0 md:text-5">
-          <span className="font-sans font-bold px-2.5 tracking-widest" style={{ color: theme.text }}>
+    // "Fade top" equivalent using Tailwind/standard CSS
+    <header className="fixed top-0 w-full z-50 bg-transparent transition-all duration-1000 animate-fadeInDown">
+      <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
+        
+        {/* Logo Section */}
+        <NavLink to={link} className="no-underline">
+          <span 
+            className="text-2xl font-bold font-mono tracking-tighter" 
+            style={{ color: theme.text }}
+          >
             {greeting.logo_name}
           </span>
         </NavLink>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Toggle (Checkbox Hack from original repo) */}
         <input className="hidden peer" type="checkbox" id="menu-btn" />
-        <label className="cursor-pointer inline-block float-right p-7 relative select-none md:hidden" htmlFor="menu-btn">
-          <span className="bg-[#fb1056] block h-0.5 relative transition-all duration-200 w-4.5 peer-checked:bg-transparent 
-            before:content-[''] before:bg-[#fb1056] before:block before:h-full before:absolute before:transition-all before:duration-200 before:w-full before:top-1.25
-            after:content-[''] after:bg-[#fb1056] after:block after:h-full after:absolute after:after:transition-all after:duration-200 after:w-full after:top-1.25
-            peer-checked:before:rotate-45 peer-checked:before:top-0 peer-checked:after:rotate-45 peer-checked:after:top-0">
-          </span>
+        <label 
+          className="cursor-pointer md:hidden block px-2 py-4 relative select-none" 
+          htmlFor="menu-btn"
+        >
+          <span className="bg-gray-500 block h-0.5 w-5 relative after:content-[''] after:bg-gray-500 after:block after:h-full after:absolute after:w-full after:top-1.5 before:content-[''] before:bg-gray-500 before:block before:h-full before:absolute before:w-full before:-top-1.5"></span>
         </label>
 
         {/* Navigation Menu */}
-        <ul className="m-0 p-2.5 list-none overflow-hidden clear-both max-h-0 transition-all duration-200 ease-out font-sans peer-checked:max-h-92.5 md:max-h-none md:flex md:items-center">
+        <ul className="list-none flex flex-col md:flex-row items-center m-0 p-0 overflow-hidden max-h-0 peer-checked:max-h-screen md:max-h-full transition-all duration-300 ease-in-out md:static absolute top-16 left-0 w-full md:w-auto bg-white md:bg-transparent dark:bg-gray-900 md:dark:bg-transparent">
           <li>
-            <NavLink to="/home" className={`${navLinkBase} hover:bg-[#2ab0ee] hover:shadow-[0_2px_10px_#2ab0ee] hover:text-white!`} 
-              activeStyle={{ fontWeight: "bold" }} style={{ color: theme.text }}>
+            <NavLink to="/home" className={navLinkClasses} style={{ color: theme.text }}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/education" className={`${navLinkBase} hover:bg-[#eb6559] hover:shadow-[0_2px_10px_#eb6559] hover:text-white!`} 
-              activeStyle={{ fontWeight: "bold" }} style={{ color: theme.text }}>
+            <NavLink to="/education" className={navLinkClasses} style={{ color: theme.text }}>
               Education
             </NavLink>
           </li>
           <li>
-            <NavLink to="/experience" className={`${navLinkBase} hover:bg-[#f7b908] hover:shadow-[0_2px_10px_#f7b908] hover:text-white!`} 
-              activeStyle={{ fontWeight: "bold" }} style={{ color: theme.text }}>
+            <NavLink to="/experience" className={navLinkClasses} style={{ color: theme.text }}>
               Experience
             </NavLink>
           </li>
           <li>
-            <NavLink to="/projects" className={`${navLinkBase} hover:bg-[#e44160] hover:shadow-[0_2px_10px_#e44160] hover:text-white!`} 
-              activeStyle={{ fontWeight: "bold" }} style={{ color: theme.text }}>
+            <NavLink to="/projects" className={navLinkClasses} style={{ color: theme.text }}>
               Projects
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contact" className={`${navLinkBase} hover:bg-[#47a148] hover:shadow-[0_1px_10px_#47a148] hover:text-white!`} 
-              activeStyle={{ fontWeight: "bold" }} style={{ color: theme.text }}>
+            <NavLink to="/contact" className={navLinkClasses} style={{ color: theme.text }}>
               Contact
             </NavLink>
           </li>
+          <li>
+            <a
+              href="https://apifi.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 hover:text-blue-500 transition-colors duration-300"
+              style={{ color: theme.text }}
+            >
+              Apifi
+            </a>
+          </li>
 
           {/* Theme Toggle Button */}
-          <button 
+          <button
             onClick={changeTheme}
-            className="cursor-pointer h-11.25 w-11.25 mr-1.25 ml-3.75 pt-1.25 rounded-full border-none flex items-center justify-center outline-none transition-all duration-200 ease-in-out hover:shadow-lg"
-            style={{ 
-              backgroundColor: theme.name === "light" ? "#7CD1F7" : "#292C3F",
-            }}
-            onMouseOver={(e) => e.currentTarget.style.boxShadow = `0 3px 8px ${theme.name === "light" ? "#F7D774" : "#646464"}`}
-            onMouseOut={(e) => e.currentTarget.style.boxShadow = "none"}
+            className={`ml-4 p-2 flex items-center justify-center rounded-full transition-all duration-200 outline-none hover:shadow-lg ${
+              theme.name === "light" ? "bg-[#7CD1F7] hover:shadow-[#F7D774]" : "bg-[#292C3F] hover:shadow-[#646464]"
+            }`}
           >
-            {icon}
+            {theme.name === "dark" ? (
+              <HiMoon size={20} color="#A7A7A7" />
+            ) : (
+              <CgSun size={20} color="#F9D784" />
+            )}
           </button>
         </ul>
-      </header>
-    </Fade>
+      </div>
+    </header>
   );
 }
 

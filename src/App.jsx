@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import Education from "./components/Education";
 import { chosenTheme } from "./theme";
 

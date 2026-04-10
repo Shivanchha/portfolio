@@ -34,3 +34,11 @@
   --animate-brows-pulse: pulse-scale 6.1s linear infinite;
   --animate-pe-rotate: foot-rotate 6s infinite;
 }
+
+@theme {
+  --color-github: #333;
+  --color-linkedin: #0077b5;
+  --color-twitter: #1da1f2;
+  --color-instagram: #e4405f;
+  --color-google: #ea4335;
+}

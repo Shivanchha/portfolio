@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@iconify/react": "^6.0.2",
     "@tailwindcss/vite": "^4.2.2",
     "framer-motion": "^12.38.0",
     "glamor": "^2.20.40",
