@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  /* Vertical Float (Head, Shirt, Legs) */
+  @keyframes float-v {
+    0%, 100% { transform: translateY(-10px); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* Eye Movement */
+  @keyframes eye-x {
+    0%, 100% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+  }
+
+  /* Brow Pulse */
+  @keyframes pulse-scale {
+    0%, 100% { transform: scale(0.96); }
+    50% { transform: scale(1); }
+  }
+
+  /* Foot Rotation */
+  @keyframes foot-rotate {
+    0%, 100% { transform: rotateX(0deg); }
+    50% { transform: rotateX(2deg); }
+  }
+
+  /* Animation Classes */
+  --animate-float-slow: float-v 6s ease-in-out infinite;
+  --animate-float-head: float-v 6s ease-in-out infinite;
+  --animate-float-fast: float-v 5s linear infinite;
+  --animate-float-notebook: float-v 6s linear infinite;
+  --animate-eye-move: eye-x 4s linear infinite;
+  --animate-brows-pulse: pulse-scale 6.1s linear infinite;
+  --animate-pe-rotate: foot-rotate 6s infinite;
+}
